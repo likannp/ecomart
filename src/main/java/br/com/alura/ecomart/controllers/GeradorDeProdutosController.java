@@ -14,11 +14,15 @@ public class GeradorDeProdutosController {
         this.chatClient = chatClientBuilder.build();
     }
     @GetMapping
-    public String gerarProdutos(){
-        var pergunta = "Gere 5 produtos ecologicos";
-        return this.chatClient.prompt()
-                .user(pergunta)
-                .call()
-                .content();
+    public String gerarProdutos() {
+        try {
+            var pergunta = "Gere 5 produtos ecológicos";
+            return this.chatClient.prompt()
+                    .user(pergunta)
+                    .call()
+                    .content();
+        } catch (Exception e) {
+            return "Erro ao gerar produtos: " + e.getMessage();
+        }
     }
 }
